@@ -3,19 +3,6 @@ import { Meteor } from "meteor/meteor";
 
 const Items = new Mongo.Collection("items");
 
-populate = () => {
-  while (Items.find().count() < 10) {
-    Items.insert({
-      name: faker.commerce.product(),
-      image: faker.image.food(),
-      likes: 0,
-      dislikes: 0,
-      wantMore: 0,
-      wantLess: 0
-    });
-  }
-};
-
 Meteor.methods({
   "Items.addOne": ({ name }) => {
     return Items.insert({ name });
@@ -37,5 +24,19 @@ Meteor.methods({
 Meteor.publish("items", () => {
   return Items.find();
 });
+
+populate = () => {
+  while (Items.find().count() < 10) {
+    Items.insert({
+      name: "Chips de Banane",
+      image:
+        "https://s3.eu-central-1.amazonaws.com/totems3/products/3C5A1379.jpg",
+      likes: 0,
+      dislikes: 0,
+      wantMore: 0,
+      wantLess: 0
+    });
+  }
+};
 
 export default Items;
