@@ -8,16 +8,20 @@ Meteor.methods({
     return Items.insert({ name });
   },
   "Item.like": ({ id }) => {
-    return Items.update({ _id: id }, { $inc: { likes: 1 } });
+    console.log(Items.findOne({ _id: `${id}` }));
+    return Items.update({ _id: `${id}` }, { $inc: { likes: 1 } });
   },
   "Item.dislike": ({ id }) => {
-    return Items.update({ _id: id }, { $inc: { dislikes: 1 } });
+    console.log(Items.findOne({ _id: `${id}` }));
+    return Items.update({ _id: `${id}` }, { $inc: { dislikes: 1 } });
   },
   "Item.wantMore": ({ id }) => {
-    return Items.update({ _id: id }, { $inc: { wantMore: 1 } });
+    console.log(Items.findOne({ _id: `${id}` }));
+    return Items.update({ _id: `${id}` }, { $inc: { wantMore: 1 } });
   },
   "Item.wantLess": ({ id }) => {
-    return Items.update({ _id: id }, { $inc: { wantLess: 1 } });
+    console.log(Items.findOne({ _id: `${id}` }));
+    return Items.update({ _id: `${id}` }, { $inc: { wantLess: 1 } });
   }
 });
 
@@ -26,8 +30,10 @@ Meteor.publish("items", () => {
 });
 
 populate = () => {
+  let i = 0;
   while (Items.find().count() < 10) {
     Items.insert({
+      _id: `${++i}`,
       name: "Chips de Banane",
       image:
         "https://s3.eu-central-1.amazonaws.com/totems3/products/3C5A1379.jpg",
