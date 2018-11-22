@@ -2,6 +2,7 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import Meteor, { withTracker } from "react-native-meteor";
 import Swiper from "react-native-deck-swiper";
+import Card from "./components/Card"
 
 const SERVER_URL = "ws://localhost:3000/websocket";
 
@@ -167,15 +168,16 @@ class Main extends React.Component {
         }}
         renderCard={card => {
           return (
-            <View style={styles.card}>
-              <Image
-                style={{ flex: 1 }}
-                source={{
-                  uri: card.image
-                }}
-              />
-              <Text>{card.name}</Text>
-            </View>
+              <Card card={card}/>
+            // <View style={styles.card}>
+            //   <Image
+            //     style={{ flex: 1 }}
+            //     source={{
+            //       uri: card.image
+            //     }}
+            //   />
+            //   <Text>{card.name}</Text>
+            // </View>
           );
         }}
         onSwipedLeft={cardIndex => {

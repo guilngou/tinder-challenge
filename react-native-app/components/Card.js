@@ -1,8 +1,11 @@
 import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+
 
 
 class Card extends React.Component {
   render() {
+    const { card } = this.props;
     return (
         <View style={styles.card}>
           <Image
