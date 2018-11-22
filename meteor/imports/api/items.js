@@ -12,7 +12,6 @@ Meteor.methods({
     return Items.update({ _id: `${id}` }, { $inc: { likes: 1 } });
   },
   "Item.dislike": ({ id }) => {
-    console.log(id);
     console.log(Items.findOne({ _id: id }));
     return Items.update({ _id: id }, { $inc: { dislikes: 1 } });
   },

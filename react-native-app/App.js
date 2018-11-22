@@ -9,11 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // cards: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
       cards: [{ name: "test1", id: 1 }, { name: "test2", id: 2 }],
-      swipedAllCards: false,
-      swipeDirection: "",
-      isSwipingBack: false,
       cardIndex: 0
     };
   }
@@ -24,13 +20,11 @@ class App extends React.Component {
   onSwipe = (cardIndex, buttonName) => {
     console.log("cardIndex : " + cardIndex);
     console.log("buttonName : " + buttonName);
-
     console.log(this.props.items[cardIndex]);
     const id = this.props.items[cardIndex]._id;
 
     Meteor.call(`Item.${buttonName}`, { id }, (err, res) => {
       console.log(`Item.${buttonName}`, err, res);
-
       if (res) {
         this.setState({
           cardIndex: this.state.cardIndex + 1
@@ -48,11 +42,8 @@ class App extends React.Component {
   }
 
   renderSwiper() {
-    console.log("this.state.cardIndex: " + this.state.cardIndex);
-    console.log(" ");
     return (
       <Swiper
-        // cards={this.state.cards}
         cards={this.props.items}
         overlayLabels={{
           bottom: {
@@ -183,9 +174,7 @@ class App extends React.Component {
                   uri: card.image
                 }}
               />
-              <Text>
-                {card.name} ID : {card._id}
-              </Text>
+              <Text>{card.name}</Text>
             </View>
           );
         }}
